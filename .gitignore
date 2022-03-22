@@ -1,0 +1,6 @@
+venv
+2. Init Database
+files
+.idea
+.env
+__pycache__

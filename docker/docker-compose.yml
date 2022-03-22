@@ -1,0 +1,37 @@
+version: "3"
+services:
+  redis:
+    image: redis:6.2.1-alpine
+    restart: unless-stopped
+    volumes:
+      - /data
+    ports:
+      - "6379:6379"
+
+  postgres:
+    restart: unless-stopped
+    image: ${POSTGRES_VERSION}
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      LOCALE: RU.UTF8
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    ports:
+      - "5433:5432"
+    volumes:
+      - ../2. Init Database:/docker-entrypoint-initdb.d
+
+  app:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    tty: true
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - .env
+    restart: unless-stopped
+    ports:
+      - "8000:8000"

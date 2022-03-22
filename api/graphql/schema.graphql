@@ -1,0 +1,97 @@
+type Query {
+    categories (id: ID, page: Int): [Categories!]
+    manufacturers (id: ID, page: Int): [Manufacturers!]
+    products (id: ID, page: Int) : [Products!]
+    images (page: Int): [Images!]
+    slider: [Slider!]
+    isAuthenticated (token: String): Boolean!
+    user (token: String): User!
+}
+scalar Datetime
+type User {
+    id: ID!
+    email: String!
+    username: String!
+    discount: Int!
+    date_joined: Datetime!
+    first_name: String
+    last_name: String
+}
+
+type Categories {
+    id: ID!
+    name: String!
+    description: String
+    availability: Boolean!
+    products: [Products!]
+    images: [Images!]
+}
+
+type Manufacturers {
+    id: ID!
+    name: String!
+    description: String
+    products: [Products!]
+    images: [Images!]
+}
+
+scalar JSON
+type Products {
+    id: ID!
+    name: String!
+    description: JSON
+    price: Int!
+    availability: Boolean!
+    option: JSON
+    product_categories: Int
+    product_manufacturers: Int
+    quantity_of_goods: Int!
+    images: [Images!]!
+}
+
+type Images {
+    images: String!
+    content_type: String!
+    object_id: String!
+    content_object: String
+}
+
+type Slider {
+    id: ID!
+    name: String!
+    description: String!
+    products: [Products!]
+    images: [Images!]
+    path: String!
+}
+
+type Mutation {
+    login(username: String!, password: String!): AuthResults!
+    registration (username: String!, password: String!, email: String!, first_name: String, last_name: String): AuthResults!
+    orders (token: String!, id: ID): Orders!
+    basket (token: String!, id: ID, product: Int, count: Int): [Basket!]
+}
+
+type AuthResults {
+    status: Boolean!
+    token: String
+    err: String
+}
+
+type Orders {
+    id: ID!
+    customers: String!
+    order_price: Int!
+    quantity_of_goods: Int!
+    delivery_method: String!
+    payment_method: String!
+    status: String!
+    commentary: String
+}
+
+type Basket {
+    id: ID
+    product: Products!
+    order: Orders!
+    count: Int
+}
