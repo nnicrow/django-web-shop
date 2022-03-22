@@ -6,5 +6,5 @@
 
  Сборка докера
  
- * cd docker
- * docker-compose up --build
+ * `cd docker`
+ * `docker-compose up --build`
