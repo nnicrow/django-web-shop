@@ -1,6 +1,7 @@
 #!/bin/sh
 echo Start app
 cd backend/
+echo Wait 5 seconds to run dependents
 sleep 5
 echo Run migrate
 python manage.py migrate

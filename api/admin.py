@@ -22,25 +22,11 @@ class ImageInline(GenericTabularInline):
     image_preview.short_description = 'Preview'
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ModelsWithImageAndIdAdmin(admin.ModelAdmin):
     inlines = [
         ImageInline,
     ]
     readonly_fields = ('quantity_of_goods', 'id')
-
-
-class ManufacturersAdmin(admin.ModelAdmin):
-    inlines = [
-        ImageInline,
-    ]
-    readonly_fields = ('quantity_of_goods', 'id')
-
-
-class CategoriesAdmin(admin.ModelAdmin):
-    inlines = [
-        ImageInline,
-    ]
-    readonly_fields = ('quantity_of_goods', 'id',)
 
 
 class SliderAdmin(admin.ModelAdmin):
@@ -82,9 +68,9 @@ class CustomUserAdmin(UserAdmin):
     readonly_fields = ('id',)
 
 
-admin.site.register(Categories, CategoriesAdmin)
-admin.site.register(Manufacturers, ManufacturersAdmin)
-admin.site.register(Products, ProductAdmin)
+admin.site.register(Categories, ModelsWithImageAndIdAdmin)
+admin.site.register(Manufacturers, ModelsWithImageAndIdAdmin)
+admin.site.register(Products, ModelsWithImageAndIdAdmin)
 admin.site.register(Users, CustomUserAdmin)
 admin.site.register(Orders, OrdersAdmin)
 admin.site.register(Images)
