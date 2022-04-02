@@ -34,4 +34,4 @@ services:
       - .env
     restart: unless-stopped
     ports:
-      - "8000:8000"
+      - ${EXTERNAL_SEVER_PORT}

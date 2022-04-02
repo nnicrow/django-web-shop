@@ -1,5 +1,6 @@
-from ariadne import gql, make_executable_schema, load_schema_from_path
+from ariadne import gql, format_error, make_executable_schema, load_schema_from_path
 from ariadne.asgi import GraphQL
+from graphql.error.graphql_error import GraphQLError
 
 from api.graphql.resolver import QueryResolver, CategoriesResolver, ManufacturersResolver, ProductsResolver, \
     SliderResolver, MutationResolver, BasketResolver
@@ -16,5 +17,6 @@ schema = make_executable_schema(
     MutationResolver.mutation,
     BasketResolver.basket
 )
+
 
 app = GraphQL(schema, debug=False)

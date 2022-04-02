@@ -18,6 +18,11 @@ class QueryResolver:
     query = ObjectType("Query")
 
     @staticmethod
+    @query.field('getCategoryById')
+    def resolve_get_category_by_id(obj, info, id):
+        return Categories.objects.get(id=id)
+
+    @staticmethod
     @query.field('categories')
     def resolve_categories(obj, info, id=None, page=1):
         return paginate(Categories.objects.all() if not id

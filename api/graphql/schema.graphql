@@ -1,4 +1,6 @@
 type Query {
+    getCategoryById(id: ID!): Categories!
+    getCategoriesList(page: Int = 0): [Categories!]!
     categories (id: ID, page: Int): [Categories!]
     manufacturers (id: ID, page: Int): [Manufacturers!]
     products (id: ID, page: Int) : [Products!]
